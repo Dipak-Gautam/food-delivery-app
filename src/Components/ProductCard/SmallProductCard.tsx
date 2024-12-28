@@ -1,33 +1,31 @@
 import React from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import productDataProp from "../../schema/ProductData/productData.schema";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import AddToCart from "../AddToCart/AddToCart";
-import productDataProp from "../../schema/ProductData/productData.schema";
 
-interface BigProductCardProp {
+interface SmallProductCardProp {
   productData: productDataProp;
 }
 
-const BigProductCard = ({ productData }: BigProductCardProp) => {
+const SmallProductCard = ({ productData }: SmallProductCardProp) => {
   return (
-    <View className="border w-72 h-60 rounded-3xl border-gray-300 shadow-md bg-white overflow-hidden mr-5 my-3">
-      <View className="overflow-hidden ">
+    <View className="border  border-slate-300 bg-white rounded-3xl overflow-hidden shadow-2xl my-2 flex-row gap-3">
+      <View className=" flex ">
         <Image
           source={{
             uri: productData.image,
           }}
           resizeMode="cover"
-          className="h-32 w-72"
+          className="h-24 w-24 "
         />
       </View>
-      <View className="mx-3 mt-2 justify-between flex-row">
-        <View>
-          <View>
-            <Text className="text-black font-bold text-xl">
-              {productData.name}
-            </Text>
-          </View>
-          <View className="flex-row gap-2  items-center mt-1">
+      <View className="py-1 flex-row justify-between flex-1 pr-3">
+        <View className="justify-evenly">
+          <Text className="text-black font-semibold text-lg">
+            {productData.name}
+          </Text>
+          <View className="flex-row gap-3">
             <View className="flex-row  gap-2 items-center ">
               <FontAwesome name="star" color={"#f1d054"} size={20} />
               <Text className="text-sm">{productData.rating}</Text>
@@ -48,11 +46,13 @@ const BigProductCard = ({ productData }: BigProductCardProp) => {
             </Text>
           </View>
         </View>
-        <View className="flex justify-between">
-          <Text className="text-xl text-orange-500 font-semibold text-right ">
-            $ {productData.price}
-          </Text>
-          <View className="">
+        <View className="justify-around">
+          <View className="flex ">
+            <Text className="text-xl text-orange-500 font-semibold text-right ">
+              $ {productData.price}
+            </Text>
+          </View>
+          <View>
             <AddToCart />
           </View>
         </View>
@@ -61,4 +61,4 @@ const BigProductCard = ({ productData }: BigProductCardProp) => {
   );
 };
 
-export default BigProductCard;
+export default SmallProductCard;

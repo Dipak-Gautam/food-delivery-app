@@ -1,13 +1,16 @@
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import BigProductCard from "../ProductCard/BigProductCard";
 import heroDataProp from "../../schema/HeroCard/heroData.schema";
+import productDataProp from "../../schema/ProductData/productData.schema";
+import { useRouter } from "expo-router";
 
 interface HeroCardProp {
   heroData: heroDataProp;
 }
 
 const HeroCard = ({ heroData }: HeroCardProp) => {
+  const router = useRouter();
   return (
     <View className="flex  mt-2 mb-4 ">
       <View className="flex-row justify-between">
@@ -19,13 +22,15 @@ const HeroCard = ({ heroData }: HeroCardProp) => {
             {heroData.cardDescription}
           </Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => router.push("/SearchScreen")}>
           <Text className="text-orange-500 font-semibold">See all</Text>
         </TouchableOpacity>
       </View>
-      <View className="mt-3">
-        <BigProductCard productData={heroData.productData[0]} />
-      </View>
+      <ScrollView className=" flex-row gap-6" horizontal>
+        {heroData.productData.map((item: productDataProp, index: number) => (
+          <BigProductCard productData={item} key={index} />
+        ))}
+      </ScrollView>
     </View>
   );
 };

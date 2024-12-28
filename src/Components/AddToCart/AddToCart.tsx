@@ -22,9 +22,9 @@ const AddToCart = () => {
           <Text className="text-white text-sm">Add to cart</Text>
         </TouchableOpacity>
       ) : (
-        <View className=" rounded-2xl border border-orange-500 bg-orange-500 w-24 flex-row justify-between">
+        <View className=" rounded-2xl  w-24 flex-row justify-between">
           <TouchableOpacity
-            className="w-[35%] flex justify-center items-center"
+            className="w-[35%] flex justify-center items-center bg-orange-500 rounded-full"
             onPress={() => removeItem()}
           >
             <Text className="text-white text-[15px] py-1 font-extrabold">
@@ -35,10 +35,10 @@ const AddToCart = () => {
             <Text className="text-center">{quantity}</Text>
           </View>
           <TouchableOpacity
-            className="w-[35%] flex justify-center items-center"
+            className="w-[35%] flex justify-center items-center bg-orange-500 rounded-full"
             onPress={() => addItem()}
           >
-            <Text className="text-white text-[15px] py-1 font-extrabold">
+            <Text className="text-white text-[15px] py-1 font-extrabold ">
               +
             </Text>
           </TouchableOpacity>

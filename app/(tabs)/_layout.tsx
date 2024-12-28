@@ -2,6 +2,8 @@ import { Tabs } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React from "react";
 import { View } from "react-native";
+import { Provider } from "react-redux";
+import foodStore from "../../src/Store";
 
 const TabsLayout = () => {
   return (
@@ -36,6 +38,7 @@ const TabsLayout = () => {
       <Tabs.Screen
         name="Cart"
         options={{
+          headerShown: false,
           tabBarIcon: ({ color }) => (
             <FontAwesome name="shopping-cart" size={25} color={color} />
           ),

@@ -1,7 +1,9 @@
 import React from "react";
 
 import { Control, Controller, FieldErrors, FieldValues } from "react-hook-form";
+
 import { Text, TextInput, View } from "react-native";
+
 interface TextInputControllersProp {
   control: Control<any>;
   errors: FieldValues;

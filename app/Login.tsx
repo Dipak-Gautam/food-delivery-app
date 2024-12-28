@@ -29,13 +29,7 @@ const Login = () => {
   const onSubbmit: SubmitHandler<loginSchema> = async (data) => {
     console.log(data);
     await new Promise<void>((resolve) => setTimeout(resolve, 1000));
-    if (data.email == "anjan@gmail.com" && data.password == "password123") {
-      router.replace("(tabs)/Task");
-    } else if (data.email != "anjan@gmail.com") {
-      setError("email", { message: "Invalid email" });
-    } else {
-      setError("password", { message: "Incorrect password" });
-    }
+    router.replace("(tabs)/Home");
   };
 
   return (
@@ -93,7 +87,7 @@ const Login = () => {
 
       <TouchableOpacity
         className="mb-8 w-40 mx-auto"
-        onPress={() => router.replace("CreateAccount")}
+        onPress={() => router.navigate("CreateAccount/UserInfo")}
       >
         <Text className="underline text-center text-gray-700  ">
           Create an account

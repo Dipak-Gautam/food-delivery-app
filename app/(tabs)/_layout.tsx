@@ -1,27 +1,43 @@
 import { Tabs } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React from "react";
+import { View } from "react-native";
 
 const TabsLayout = () => {
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: "#ff7a00",
+      }}
+    >
       <Tabs.Screen
-        name="Messages"
+        name="Home"
         options={{
           headerShown: false,
-          title: "Chats",
+          title: "Home",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={27} name="wechat" color={color} />
+            <FontAwesome size={28} name="home" color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="Task"
+        name="Messages"
         options={{
           headerShown: false,
-          title: "Task",
+          title: "Messages",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="home" color={color} />
+            <View>
+              <FontAwesome size={27} name="wechat" color={color} />
+            </View>
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="Cart"
+        options={{
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="shopping-cart" size={25} color={color} />
           ),
         }}
       />

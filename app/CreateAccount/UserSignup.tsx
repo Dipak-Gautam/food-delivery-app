@@ -1,13 +1,13 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { router } from "expo-router";
 import React from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import TextInputControllers from "../../src/Components/Controllers/TextInputControllers";
 import { string, z } from "zod";
-import TextInputControllers from "../src/Components/Controllers/TextInputControllers";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { router } from "expo-router";
 
-const signupSchema = z
+const UserSignupSchema = z
   .object({
     email: string().email("Please enter valid email"),
     password: string().min(8, "password must me 8 character long"),
@@ -16,34 +16,30 @@ const signupSchema = z
       "password and confirm password did not match"
     ),
   })
-  .refine((data) => data.password === data.password, {
+  .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],
     message: "Password must match",
   });
 
-type signupTypes = z.infer<typeof signupSchema>;
+type UserSignupSchema = z.infer<typeof UserSignupSchema>;
 
-const CreateAccount = () => {
+const UserSignup = () => {
   const {
     control,
     handleSubmit,
     setError,
     formState: { errors, isSubmitting },
-  } = useForm<signupTypes>({
-    resolver: zodResolver(signupSchema),
+  } = useForm<UserSignupSchema>({
+    resolver: zodResolver(UserSignupSchema),
   });
-  const onSubbmit: SubmitHandler<signupTypes> = async (data) => {
+  const onSubbmit: SubmitHandler<UserSignupSchema> = async (data) => {
     await new Promise<void>((resolve) => {
       setInterval(resolve, 1000);
     });
-    if (data.email == "anjan@gmail.com") {
-      setError("email", { message: "Email already taken" });
-    }
-    console.log("data", data);
+    router.replace("(tabs)/Home");
   };
-
   return (
-    <SafeAreaView className="flex-1  px-8">
+    <SafeAreaView className="flex-1  px-8 bg-white">
       <View className="flex-1 justify-center  gap-10">
         <View>
           <Text className="text-5xl mb-2 text-indigo-400 font-medium">
@@ -54,19 +50,19 @@ const CreateAccount = () => {
           <TextInputControllers
             control={control}
             name="email"
-            placeholder="Enter your email"
+            placeholder="Enter email"
             errors={errors}
           />
           <TextInputControllers
             control={control}
             name="password"
-            placeholder="Enter your password"
+            placeholder="Enter Password"
             errors={errors}
           />
           <TextInputControllers
             control={control}
             name="confirmPassword"
-            placeholder="Comfirm Password"
+            placeholder="Confirm Password"
             errors={errors}
           />
         </View>
@@ -79,18 +75,12 @@ const CreateAccount = () => {
               isSubmitting ? "bg-[#7d6b46]" : "bg-[#ffb727]"
             }  text-white font-semibold mt-4`}
           >
-            {isSubmitting ? <Text>Submitting</Text> : <Text>Sign Up</Text>}
+            {isSubmitting ? <Text>Submitting</Text> : <Text>Sign In</Text>}
           </Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        className="mb-8 w-32 mx-auto"
-        onPress={() => router.replace("Login")}
-      >
-        <Text className="underline text-center text-gray-700">Sign In</Text>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 };
 
-export default CreateAccount;
+export default UserSignup;

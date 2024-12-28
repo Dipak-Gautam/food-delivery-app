@@ -7,13 +7,13 @@ import * as NavigationBar from "expo-navigation-bar";
 
 NavigationBar.setBackgroundColorAsync("#ffffff");
 const RootLayout = () => {
-  const prevLogin = true;
+  const prevLogin = false;
   const router = useRouter();
   useEffect(() => {
     if (prevLogin) {
       router.replace("/Login");
     } else {
-      router.replace("/CreateAccount");
+      router.replace("/(tabs)/Home");
     }
   }, [prevLogin, router]);
   return (
@@ -37,12 +37,9 @@ const RootLayout = () => {
             headerTitle: "Login",
           }}
         />
-        <Stack.Screen
-          name="CreateAccount"
-          options={{
-            headerTitle: "Create Account",
-          }}
-        />
+        <Stack.Screen name="CreateAccount/UserAddress" />
+        <Stack.Screen name="CreateAccount/UserInfo" />
+        <Stack.Screen name="CreateAccount/UserSignup" />
         <Stack.Screen name="(tabs)" />
       </Stack>
     </SafeAreaProvider>

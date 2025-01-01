@@ -6,17 +6,25 @@ import { string, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { router } from "expo-router";
+import { useSearchParams } from "expo-router/build/hooks";
 
 const UserAddressSchema = z.object({
   city: z.string().min(2, "Name must beat at least 2 character long"),
   state: z.string(),
   zipCode: z.string(),
   deliveryInstructions: z.string().optional(),
+  address: z.string().min(2, "Please provide a valid address"),
 });
 
 type UserAddressSchema = z.infer<typeof UserAddressSchema>;
 
 const UserAddress = () => {
+  const searchParams = useSearchParams();
+  let userInfo = searchParams.get("userInfo");
+  if (userInfo) {
+    userInfo = JSON.parse(userInfo);
+  }
+
   const {
     control,
     handleSubmit,
@@ -29,7 +37,14 @@ const UserAddress = () => {
     await new Promise<void>((resolve) => {
       setInterval(resolve, 1000);
     });
-    router.navigate("CreateAccount/UserSignup");
+    let combinedData = {
+      userInfo: userInfo,
+      userAddress: data,
+    };
+    router.navigate({
+      pathname: "/CreateAccount/UserSignup",
+      params: { combinedData: JSON.stringify(combinedData) },
+    });
   };
   return (
     <SafeAreaView className="flex-1  px-8 bg-white">
@@ -40,12 +55,6 @@ const UserAddress = () => {
           </Text>
         </View>
         <View className="">
-          <TextInputControllers
-            control={control}
-            name="city"
-            placeholder="Enter your City"
-            errors={errors}
-          />
           <View className="flex-row w-[100%] justify-between">
             <View className="w-[40%]">
               <TextInputControllers
@@ -65,6 +74,18 @@ const UserAddress = () => {
               />
             </View>
           </View>
+          <TextInputControllers
+            control={control}
+            name="city"
+            placeholder="Enter your City"
+            errors={errors}
+          />
+          <TextInputControllers
+            control={control}
+            name="address"
+            placeholder="Enter your address"
+            errors={errors}
+          />
           <Controller
             name="deliveryInstructions"
             control={control}

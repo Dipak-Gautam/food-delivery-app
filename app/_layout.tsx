@@ -9,20 +9,10 @@ import foodStore from "../src/Store";
 
 NavigationBar.setBackgroundColorAsync("#ffffff");
 const RootLayout = () => {
-  const prevLogin = false;
-  const router = useRouter();
-  useEffect(() => {
-    if (prevLogin) {
-      router.replace("/Login");
-    } else {
-      router.replace("/(tabs)/Home");
-    }
-  }, [prevLogin, router]);
   return (
     <Provider store={foodStore}>
       <SafeAreaProvider>
         <StatusBar style="auto" />
-
         <Stack
           screenOptions={{
             headerShown: false,

@@ -53,7 +53,7 @@ const BigProductCard = ({ productData }: BigProductCardProp) => {
             $ {productData.price}
           </Text>
           <View className="">
-            <AddToCart />
+            <AddToCart product={productData} />
           </View>
         </View>
       </View>

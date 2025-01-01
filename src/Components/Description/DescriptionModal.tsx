@@ -18,15 +18,6 @@ interface DescriptionModalProp {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
   productData: productDataProp;
 }
-const ingredients = [
-  "Flame-grilled beef patty",
-  "Melted cheddar cheese",
-  "Fresh lettuce",
-  "Sliced tomatoes",
-  "Crunchy pickles",
-  "Signature burger sauce",
-  "Toasted sesame bun",
-];
 
 const DescriptionModal = ({
   visible,
@@ -95,7 +86,7 @@ const DescriptionModal = ({
                 </Text>
               </View>
               <View>
-                <AddToCart />
+                <AddToCart product={productData} />
               </View>
             </View>
           </View>
@@ -107,10 +98,7 @@ const DescriptionModal = ({
               Description
             </Text>
             <Text className="text-justify text-sm">
-              Juicy, flame-grilled beef patty layered with melted cheddar
-              cheese, crisp lettuce, fresh tomatoes, crunchy pickles, and our
-              signature burger sauce, all tucked into a toasted sesame bun. A
-              timeless favorite!
+              {productData.description}
             </Text>
           </View>
           <View className="px-4 mt-2 ">
@@ -118,7 +106,7 @@ const DescriptionModal = ({
               Ingredients
             </Text>
             <FlatList
-              data={ingredients}
+              data={productData.ingredients}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
                 <View className="flex-row items-center ">

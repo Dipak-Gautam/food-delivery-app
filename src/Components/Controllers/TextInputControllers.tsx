@@ -30,6 +30,7 @@ const TextInputControllers = ({
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
+            autoCapitalize="none"
           />
         )}
       />

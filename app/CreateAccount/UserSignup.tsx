@@ -6,6 +6,10 @@ import { string, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { router } from "expo-router";
+import { useSearchParams } from "expo-router/build/hooks";
+import SecureFetch from "../../src/ApiServices/SecureFetch";
+import { userEndPoint } from "../../src/ApiServices/endpoints";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const UserSignupSchema = z
   .object({
@@ -23,7 +27,21 @@ const UserSignupSchema = z
 
 type UserSignupSchema = z.infer<typeof UserSignupSchema>;
 
+const asyncStorage = async (token: string) => {
+  await AsyncStorage.setItem("Token", token);
+  await AsyncStorage.setItem("FirstLogin", "false");
+};
+
 const UserSignup = () => {
+  const searchParams = useSearchParams();
+  const userInfo = searchParams.get("combinedData");
+  let userData;
+  if (userInfo) {
+    userData = JSON.parse(userInfo);
+  } else {
+    return;
+  }
+
   const {
     control,
     handleSubmit,
@@ -33,10 +51,33 @@ const UserSignup = () => {
     resolver: zodResolver(UserSignupSchema),
   });
   const onSubbmit: SubmitHandler<UserSignupSchema> = async (data) => {
-    await new Promise<void>((resolve) => {
-      setInterval(resolve, 1000);
+    const formData = {
+      name: userData.userInfo.name,
+      mobile: userData.userInfo.phoneNumber,
+      email: data.email,
+      address: userData.userAddress.address,
+      city: userData.userAddress.city,
+      state: userData.userAddress.state,
+      zipcode: userData.userAddress.zipCode,
+      deliveryInstructions: userData.userAddress.deliveryInstruction,
+      password: data.password,
+    };
+
+    const request = await SecureFetch({
+      url: `${userEndPoint}/signup`,
+      header: { "content-type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(formData),
     });
-    router.replace("(tabs)/Home");
+    const response = await request.json();
+    if (request.status == 200) {
+      asyncStorage(response.token);
+      router.replace("(tabs)/Home");
+    } else {
+      setError("root", {
+        message: "Internal server error. Please try again later",
+      });
+    }
   };
   return (
     <SafeAreaView className="flex-1  px-8 bg-white">
@@ -78,6 +119,12 @@ const UserSignup = () => {
             {isSubmitting ? <Text>Submitting</Text> : <Text>Sign In</Text>}
           </Text>
         </TouchableOpacity>
+
+        <View className="justify-center  items-center">
+          <Text className="text-red-400 text-sm ml-2 text-center">
+            {errors.root?.message}
+          </Text>
+        </View>
       </View>
     </SafeAreaView>
   );

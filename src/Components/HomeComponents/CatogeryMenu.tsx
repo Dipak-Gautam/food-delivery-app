@@ -1,24 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import catogeryAssets from "../../../assets/Catogeries/catogeryAsset";
+import { router } from "expo-router";
 
 const foodData: any = [
   { image: "pizza", name: "All" },
-  { image: "hamburger", name: "Fast Food" },
+  { image: "hamburger", name: "Fast-food" },
   { image: "iceCream", name: "Sweets" },
   { image: "drinks", name: "Drinks" },
   { image: "noodle", name: "Spicy" },
 ];
 
-const CatogeryMenu = () => {
-  const [active, setActive] = useState(0);
+interface CatogeryMenuProp {
+  search?: string;
+  value?: number;
+}
+
+const CatogeryMenu = ({ search, value }: CatogeryMenuProp) => {
+  const [active, setActive] = useState(value ? value : 0);
+
+  useEffect(() => {
+    if (search) {
+      setActive(0);
+    }
+  }, [search]);
+
   return (
     <View className=" flex-row justify-around mt-4 ">
       {foodData.map((item: any, index: number) => (
         <TouchableOpacity
           key={index}
           style={{ alignItems: "center", marginBottom: 10 }}
-          onPress={() => setActive(index)}
+          onPress={() => {
+            router.push({
+              pathname: "/SearchScreen",
+              params: { category: item.name },
+            }),
+              setActive(index);
+          }}
         >
           <View
             className={`border  p-2 rounded-full ${

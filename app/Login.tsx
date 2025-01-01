@@ -9,6 +9,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import "../global.css";
 import TextInputControllers from "../src/Components/Controllers/TextInputControllers";
+import SecureFetch from "../src/ApiServices/SecureFetch";
+import { userEndPoint } from "../src/ApiServices/endpoints";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const asyncStorage = async (token: string) => {
+  await AsyncStorage.setItem("Token", token);
+  await AsyncStorage.setItem("FirstLogin", "false");
+};
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -27,9 +35,25 @@ const Login = () => {
   });
 
   const onSubbmit: SubmitHandler<loginSchema> = async (data) => {
-    console.log(data);
-    await new Promise<void>((resolve) => setTimeout(resolve, 1000));
-    router.replace("(tabs)/Home");
+    const formdata = {
+      email: data.email,
+      password: data.password,
+    };
+    const request = await SecureFetch({
+      url: `${userEndPoint}/login`,
+      header: { "content-type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(formdata),
+    });
+    const response = await request.json();
+    if (request.status == 200) {
+      asyncStorage(response.token);
+      router.replace("(tabs)/Home");
+    } else {
+      setError("root", {
+        message: "Internal server error. Please try again later",
+      });
+    }
   };
 
   return (
@@ -70,9 +94,14 @@ const Login = () => {
               {isSubmitting ? <Text>Submitting...</Text> : <Text>Sign in</Text>}
             </Text>
           </TouchableOpacity>
+          <View className="justify-center  items-center">
+            <Text className="text-red-400 text-sm ml-2 text-center">
+              {errors.root?.message}
+            </Text>
+          </View>
         </View>
 
-        <View className="flex-row w-full justify-center items-center gap-5 mt-10">
+        <View className="flex-row w-full justify-center items-center gap-5 mt-5">
           <View className="border-b w-16 border-gray-400 h-0"></View>
           <Text className="text-gray-60000 text-sm">or sign in with</Text>
           <View className="border-b h-0 w-16 border-gray-400"></View>

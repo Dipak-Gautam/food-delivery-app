@@ -11,18 +11,6 @@ const UserInfoSchema = z.object({
   name: z.string().min(2, "Name must beat at least 2 character long"),
   phoneNumber: z.string().min(10, "Please provide a valid Number"),
 });
-//   .object({
-//     email: string().email("Please enter valid email"),
-//     password: string().min(8, "password must me 8 character long"),
-//     confirmPassword: string().min(
-//       8,
-//       "password and confirm password did not match"
-//     ),
-//   })
-//   .refine((data) => data.password === data.password, {
-//     path: ["confirmPassword"],
-//     message: "Password must match",
-//   });
 
 type UserInfoSchema = z.infer<typeof UserInfoSchema>;
 
@@ -37,9 +25,12 @@ const UserInfo = () => {
   });
   const onSubbmit: SubmitHandler<UserInfoSchema> = async (data) => {
     await new Promise<void>((resolve) => {
-      setInterval(resolve, 1000);
+      setInterval(resolve, 500);
     });
-    router.navigate("CreateAccount/UserAddress");
+    router.push({
+      pathname: "/CreateAccount/UserAddress",
+      params: { userInfo: JSON.stringify(data) },
+    });
   };
   return (
     <SafeAreaView className="flex-1  px-8 bg-white">

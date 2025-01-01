@@ -5,6 +5,8 @@ const catogeryAssets: any = {
   drinks: require("./drink.png"),
   noodle: require("./noodle.png"),
   delivery: require("./delivery-bike.png"),
+  deliveryMan: require("./delivery.png"),
+  deliveryBoy: require("./delivery-boy.png"),
 };
 
 export default catogeryAssets;

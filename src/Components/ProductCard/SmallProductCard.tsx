@@ -53,7 +53,7 @@ const SmallProductCard = ({ productData }: SmallProductCardProp) => {
             </Text>
           </View>
           <View>
-            <AddToCart />
+            <AddToCart product={productData} />
           </View>
         </View>
       </View>

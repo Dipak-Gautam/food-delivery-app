@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
+import { useDispatch } from "react-redux";
+import { cartAction } from "../../Store";
+import productDataProp from "../../schema/ProductData/productData.schema";
 
-const AddToCart = () => {
+interface AddToCartProp {
+  product: productDataProp;
+}
+
+const AddToCart = ({ product }: AddToCartProp) => {
   const [quantity, setQuantity] = useState(0);
+  const dispatch = useDispatch();
 
   const addItem = () => {
     setQuantity(quantity + 1);
+    dispatch(cartAction.addItemCart(product));
   };
 
   const removeItem = () => {
     setQuantity(quantity - 1);
+    dispatch(cartAction.removeItemCart(product));
   };
 
   return (

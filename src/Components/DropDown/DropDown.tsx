@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-interface IData {
+export interface IData {
   label: string;
   value: string;
 }
-const data: IData[] = [
-  { label: "Hello", value: "Hello" },
-  { label: "Hello2", value: "Hello2" },
-];
 
 interface DropDownProp {
   setValue: any;
   value: any;
+  data: IData[];
 }
 
-const DropDown = ({ setValue, value }: DropDownProp) => {
+const DropDown = ({ setValue, value, data }: DropDownProp) => {
   const [isFocus, setIsFocus] = useState(false);
   return (
     <View>
@@ -24,6 +21,7 @@ const DropDown = ({ setValue, value }: DropDownProp) => {
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         itemTextStyle={styles.itemText}
+        itemContainerStyle={styles.itemContainerStyle}
         iconStyle={styles.iconStyle}
         data={data}
         maxHeight={300}
@@ -77,11 +75,19 @@ const styles = StyleSheet.create({
     color: "black",
   },
 
+  itemContainerStyle: {
+    backgroundColor: "#ffffff",
+    padding: -3,
+    margin: -2,
+    borderBottomWidth: 0.5,
+    borderBottomColor: "#ccc",
+  },
+
   itemText: {
     color: "black",
-    fontSize: 14,
-    margin: 0,
+    fontSize: 13,
     padding: 0,
+    margin: -5,
   },
 });
 

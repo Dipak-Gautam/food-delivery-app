@@ -25,7 +25,7 @@ const Cart = () => {
         </Text>
       </View>
       <Banner />
-      <ScrollView className="px-4 my-3 ">
+      <ScrollView className="px-4 my-3 " showsVerticalScrollIndicator={false}>
         {cartData.map((item: ICartData) => (
           <CartItems
             productData={item.data}
@@ -57,7 +57,10 @@ const Cart = () => {
         </View>
 
         <TouchableOpacity
-          className=" p-2 bg-orange-400 rounded-3xl my-3 "
+          disabled={cartData.length == 0 && true}
+          className={`p-2 ${
+            cartData.length == 0 ? "bg-[#a18e69]" : "bg-orange-400"
+          }  rounded-3xl my-3 `}
           onPress={() => setmodal(true)}
         >
           <Text className="text-xl text-white text-center font-bold">

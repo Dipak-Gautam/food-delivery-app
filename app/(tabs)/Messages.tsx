@@ -22,9 +22,9 @@ const Messages = () => {
       </View>
 
       <ScrollView className="flex-1">
-        {message.map((item) => (
+        {message.map((item, index) => (
           <View
-            key={item}
+            key={index}
             className="justify-between text-center border border-gray-200 p-3 rounded-2xl mt-4 shadow-xl shadow-gray-600 mx-5 my-1    bg-[#fefdfd] flex-row gap-2"
           >
             <View>

@@ -1,11 +1,13 @@
 import { Tabs } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React from "react";
-import { View } from "react-native";
-import { Provider } from "react-redux";
+import { Text, View } from "react-native";
+import { Provider, useSelector } from "react-redux";
 import foodStore from "../../src/Store";
+import { IStore } from "../../src/schema/Store/mainStore.schema";
 
 const TabsLayout = () => {
+  const cartData = useSelector((store: IStore) => store.cart);
   return (
     <Tabs
       screenOptions={{
@@ -28,9 +30,7 @@ const TabsLayout = () => {
           headerShown: false,
           title: "Messages",
           tabBarIcon: ({ color }) => (
-            <View>
-              <FontAwesome size={27} name="wechat" color={color} />
-            </View>
+            <FontAwesome size={27} name="wechat" color={color} />
           ),
         }}
       />
@@ -40,7 +40,14 @@ const TabsLayout = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="shopping-cart" size={25} color={color} />
+            <View>
+              <FontAwesome name="shopping-cart" size={25} color={color} />
+              {cartData.length != 0 && (
+                <Text className="absolute text-orange-500 -top-1 -right-2 text-[10px] font-semibold">
+                  {cartData.length}
+                </Text>
+              )}
+            </View>
           ),
         }}
       />

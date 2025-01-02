@@ -15,8 +15,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { IStore } from "../../schema/Store/mainStore.schema";
 import SecureFetch from "../../ApiServices/SecureFetch";
 import { mainEndpoint } from "../../ApiServices/endpoints";
-import { messageAction } from "../../Store";
+import { cartAction, messageAction } from "../../Store";
 import generateOTP from "../../InitialRenderFunctions/otpGenerate";
+import DropDown, { IData } from "../DropDown/DropDown";
+
+const data: IData[] = [
+  { label: "Card", value: "Card" },
+  { label: "Credit", value: "Credit" },
+  { label: "Cash ", value: "Cash" },
+];
 
 interface CartModalProp {
   visible: boolean;
@@ -41,6 +48,7 @@ const CartModal = ({
   total,
   setSuccessModal,
 }: CartModalProp) => {
+  const [paymentMethod, setPaymentMethod] = useState("Cash");
   const [submmiting, isSubmmiting] = useState(false);
   const userData = useSelector((store: IStore) => store.user);
   const loginToken = useSelector((store: IStore) => store.loginToken);
@@ -66,22 +74,21 @@ const CartModal = ({
       otpCode: otp.current,
       paymentMethod: "cash on delivery",
     };
-    // console.log("form data", formData);
-    // const request = await SecureFetch({
-    //   url: `${mainEndpoint}/order/add`,
-    //   header: {
-    //     "content-type": "application/json",
-    //     Authorization: `Bearer ${loginToken}`,
-    //   },
-    //   method: "POST",
-    //   body: JSON.stringify(formData),
-    // });
-    // const response = await request.json();
-
-    // if (response.state == 200) {
-    //   dispatch(messageAction.addMessage("1234"));
-    // }
-    dispatch(messageAction.addMessage(otp.current));
+    console.log("form data", userData.deliveryInstructions);
+    const request = await SecureFetch({
+      url: `${mainEndpoint}/order/add`,
+      header: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${loginToken}`,
+      },
+      method: "POST",
+      body: JSON.stringify(formData),
+    });
+    const response = await request.json();
+    if (request.status == 200) {
+      dispatch(messageAction.addMessage(generateOTP()));
+      dispatch(cartAction.clearCart());
+    }
     isSubmmiting(false);
     setModal(false);
     setSuccessModal(true);
@@ -138,6 +145,21 @@ const CartModal = ({
                 <Text className="text-black w-32 font-semibold">Total </Text>
                 <Text className="mr-2 font-semibold">:</Text>
                 <Text className="font-semibold">$ {total}</Text>
+              </View>
+              <View className="flex-row">
+                <View className="flex-row">
+                  <Text className="text-black w-32 font-semibold">
+                    Payment{" "}
+                  </Text>
+                  <Text className="mr-2 font-semibold">:</Text>
+                </View>
+                <View className="flex-1 mr-10">
+                  <DropDown
+                    value={paymentMethod}
+                    setValue={setPaymentMethod}
+                    data={data}
+                  />
+                </View>
               </View>
               <TouchableOpacity
                 className={`p-2 ${

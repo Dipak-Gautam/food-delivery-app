@@ -13,10 +13,11 @@ const foodData: any = [
 
 interface CatogeryMenuProp {
   search?: string;
-  value?: number;
+  value?: number | null;
 }
 
 const CatogeryMenu = ({ search, value }: CatogeryMenuProp) => {
+  console.log("value", value);
   const [active, setActive] = useState(value ? value : 0);
 
   useEffect(() => {

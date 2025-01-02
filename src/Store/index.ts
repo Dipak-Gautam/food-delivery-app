@@ -2,6 +2,7 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 import updateCart from "../InitialRenderFunctions/addItemToCart";
 import { ICartData } from "../schema/Store/cartData.schema";
 import removeItemFromCart from "../InitialRenderFunctions/removeItemFromCart";
+import saveMessage from "../InitialRenderFunctions/saveMessage";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -14,6 +15,11 @@ const cartSlice = createSlice({
     removeItemCart: (state, action) => {
       const updatedCart = removeItemFromCart(action.payload, state);
       return updatedCart;
+    },
+    clearCart: (state) => {
+      console.log("cleare cart called");
+      state = [];
+      return state;
     },
   },
 });
@@ -57,7 +63,11 @@ const messageSlice = createSlice({
   reducers: {
     addMessage: (state, action) => {
       state = [...state, action.payload];
-      console.log("message", state);
+      saveMessage(state);
+      return state;
+    },
+    loadMessage: (state, action) => {
+      state = action.payload;
       return state;
     },
   },

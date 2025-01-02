@@ -108,7 +108,7 @@ const UserAddress = () => {
         >
           <Text
             className={`w-full p-2 text-center rounded-xl ${
-              isSubmitting ? "bg-[#7d6b46]" : "bg-[#ffb727]"
+              isSubmitting ? "bg-[#a18e69]" : "bg-[#ffb727]"
             }  text-white font-semibold mt-4`}
           >
             {isSubmitting ? <Text>Submitting</Text> : <Text>Next</Text>}

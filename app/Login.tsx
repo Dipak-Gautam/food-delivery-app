@@ -88,7 +88,7 @@ const Login = () => {
           >
             <Text
               className={`w-full p-2 text-center rounded-xl ${
-                isSubmitting ? "bg-[#896f3d]" : "bg-[#ffb727]"
+                isSubmitting ? "bg-[#a18e69]" : "bg-[#ffb727]"
               }  text-white font-semibold mt-4`}
             >
               {isSubmitting ? <Text>Submitting...</Text> : <Text>Sign in</Text>}

@@ -2,9 +2,10 @@ import React from "react";
 
 import { Control, Controller, FieldErrors, FieldValues } from "react-hook-form";
 
-import { Text, TextInput, View } from "react-native";
+import { Text, TextInput, TextInputProps, View } from "react-native";
+import { FloatingLabelInput } from "react-native-floating-label-input";
 
-interface TextInputControllersProp {
+interface TextInputControllersProp extends TextInputProps {
   control: Control<any>;
   errors: FieldValues;
   name: string;
@@ -16,6 +17,7 @@ const TextInputControllers = ({
   errors,
   name,
   placeholder,
+  ...prop
 }: TextInputControllersProp) => {
   return (
     <View>
@@ -23,20 +25,31 @@ const TextInputControllers = ({
         name={name}
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            className="border-b p-2 rounded-lg text-base text-black"
+          <FloatingLabelInput
+            label={placeholder}
+            className="border-b p-1 rounded-lg text-base text-black translate-y-3 my-1"
             placeholder={placeholder}
             placeholderTextColor="gray"
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
             autoCapitalize="none"
+            {...prop}
+            containerStyles={{
+              borderBlockColor: "white",
+            }}
+            inputStyles={{
+              color: "black",
+            }}
+            labelStyles={{
+              fontSize: 20,
+            }}
           />
         )}
       />
       <View className="h-4">
         {errors[name] && (
-          <Text className="text-red-400 text-xs ml-2 ">
+          <Text className="text-red-400 text-xs translate-y-2 ml-2 ">
             {errors[name].message}
           </Text>
         )}

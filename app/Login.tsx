@@ -12,6 +12,9 @@ import TextInputControllers from "../src/Components/Controllers/TextInputControl
 import SecureFetch from "../src/ApiServices/SecureFetch";
 import { userEndPoint } from "../src/ApiServices/endpoints";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import getallProduct from "../src/ApiServices/functions/getAllproduct.api";
+import { useDispatch } from "react-redux";
+import { userAction } from "../src/Store";
 
 const asyncStorage = async (token: string) => {
   await AsyncStorage.setItem("Token", token);
@@ -25,6 +28,7 @@ const loginSchema = z.object({
 type loginSchema = z.infer<typeof loginSchema>;
 
 const Login = () => {
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
@@ -48,7 +52,8 @@ const Login = () => {
     const response = await request.json();
     if (request.status == 200) {
       asyncStorage(response.token);
-      router.replace("(tabs)/Home");
+      getallProduct(response.token, dispatch);
+      dispatch(userAction.addData(response.data));
     } else {
       setError("root", {
         message: "Internal server error. Please try again later",

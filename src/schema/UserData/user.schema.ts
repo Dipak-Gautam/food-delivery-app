@@ -7,4 +7,5 @@ export interface IUserProp {
   name: string;
   state: string;
   deliveryInstructions?: string;
+  zipCode: string;
 }

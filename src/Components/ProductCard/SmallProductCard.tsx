@@ -3,9 +3,10 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import productDataProp from "../../schema/ProductData/productData.schema";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import AddToCart from "../AddToCart/AddToCart";
+import { AddProductSchema } from "../../../app/Admin/AddProduct";
 
 interface SmallProductCardProp {
-  productData: productDataProp;
+  productData: productDataProp | AddProductSchema;
 }
 
 const SmallProductCard = ({ productData }: SmallProductCardProp) => {

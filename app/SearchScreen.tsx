@@ -73,10 +73,11 @@ const SearchScreen = () => {
   }, [category]);
 
   useEffect(() => {
+    category = "All";
     if (search == "") {
       return;
     }
-    category = "All";
+
     const delayDebounceFn = setTimeout(() => {
       setShowData(searchFunction(allProduct, search));
     }, 500);
@@ -102,7 +103,7 @@ const SearchScreen = () => {
         <View className=" flex  flex-row w-full gap-2 mt-3">
           <TouchableOpacity
             className="justify-center "
-            onPress={() => router.replace("/(tabs)/Home")}
+            onPress={() => router.back()}
           >
             <Ionicons color={"gray"} size={22} name="chevron-back" />
           </TouchableOpacity>
@@ -137,7 +138,7 @@ const SearchScreen = () => {
             title={`${category != null && data[category]}`}
             setShowData={setShowData}
             category={category}
-            products={showData}
+            products={allProduct}
           />
         </View>
         <View className="">
@@ -148,12 +149,12 @@ const SearchScreen = () => {
                 (productDataRef.current = item), setModal(true);
               }}
             >
-              <Animatable.View
-                animation={"fadeIn"}
-                duration={(index + 1) * 100}
+              <View
+              // animation={"fadeIn"}
+              // duration={(index + 1) * 100}
               >
                 <SmallProductCard productData={item} />
-              </Animatable.View>
+              </View>
             </TouchableOpacity>
           ))}
         </View>

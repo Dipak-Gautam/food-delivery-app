@@ -47,16 +47,19 @@ const Home = () => {
               onPress={() =>
                 router.push({
                   pathname: "/SearchScreen",
-                  params: { keyBoard: "open" },
+                  params: { keyBoard: "open", category: "All" },
                 })
               }
             >
               <AntDesign name="search1" color={"gray"} size={17} />
             </TouchableOpacity>
           </View>
-          <View className="w-11 h-11  rounded-full flex justify-center items-center p-1 bg-orange-500">
+          <TouchableOpacity
+            className="w-11 h-11  rounded-full flex justify-center items-center p-1 bg-orange-500"
+            onPress={() => router.navigate("(tabs)/Settings")}
+          >
             <Feather name="sliders" size={17} color="white" />
-          </View>
+          </TouchableOpacity>
         </View>
         <CatogeryMenu value={0} />
         <HeroCard

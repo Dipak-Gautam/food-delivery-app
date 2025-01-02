@@ -1,5 +1,5 @@
-import { Stack, useRouter } from "expo-router";
-import React, { useEffect } from "react";
+import { Stack } from "expo-router";
+import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import "../global.css";
 import { StatusBar } from "expo-status-bar";
@@ -13,28 +13,67 @@ const RootLayout = () => {
     <Provider store={foodStore}>
       <SafeAreaProvider>
         <StatusBar style="auto" />
-        <Stack
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
+        <Stack>
           <Stack.Screen
             name="index"
             options={{
-              headerTitle: "Home",
+              headerShown: false,
             }}
           />
           <Stack.Screen
             name="Login"
             options={{
-              headerTitle: "Login",
+              headerShown: false,
             }}
           />
-          <Stack.Screen name="CreateAccount/UserAddress" />
-          <Stack.Screen name="CreateAccount/UserInfo" />
-          <Stack.Screen name="CreateAccount/UserSignup" />
-          <Stack.Screen name="(tabs)" />
-          <Stack.Screen name="SearchScreen" />
+          <Stack.Screen
+            name="CreateAccount/UserAddress"
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="CreateAccount/UserInfo"
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="CreateAccount/UserSignup"
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="(tabs)"
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="SearchScreen"
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="SettingNav/ChangePassword"
+            options={{
+              title: "Setting",
+            }}
+          />
+          <Stack.Screen
+            name="SettingNav/UpdateProfile"
+            options={{
+              title: "Setting",
+            }}
+          />
+          <Stack.Screen
+            name="Admin/AddProduct"
+            options={{
+              title: "Add Product",
+            }}
+          />
         </Stack>
       </SafeAreaProvider>
     </Provider>

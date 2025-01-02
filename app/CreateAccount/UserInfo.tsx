@@ -34,11 +34,12 @@ const UserInfo = () => {
   };
   return (
     <SafeAreaView className="flex-1  px-8 bg-white">
-      <View className="flex-1 justify-center  gap-10">
+      <View className="flex-1 justify-center  gap-8">
         <View>
           <Text className="text-5xl mb-2 text-indigo-400 font-medium">
-            Sign up
+            Create
           </Text>
+          <Text className="text-5xl font-medium text-indigo-400">Account</Text>
         </View>
         <View className="">
           <TextInputControllers
@@ -52,6 +53,7 @@ const UserInfo = () => {
             name="phoneNumber"
             placeholder="Enter your Phone Number"
             errors={errors}
+            keyboardType="number-pad"
           />
         </View>
         <TouchableOpacity
@@ -71,7 +73,7 @@ const UserInfo = () => {
         className="mb-8 w-32 mx-auto"
         onPress={() => router.navigate("Login")}
       >
-        <Text className="underline text-center text-gray-700">Sign In</Text>
+        <Text className="underline text-center text-gray-700">Log In</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

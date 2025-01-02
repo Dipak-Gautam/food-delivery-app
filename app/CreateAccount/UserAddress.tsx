@@ -48,11 +48,12 @@ const UserAddress = () => {
   };
   return (
     <SafeAreaView className="flex-1  px-8 bg-white">
-      <View className="flex-1 justify-center  gap-10">
+      <View className="flex-1 justify-center  gap-8">
         <View>
           <Text className="text-5xl mb-2 text-indigo-400 font-medium">
-            Sign up
+            Create
           </Text>
+          <Text className="text-5xl font-medium text-indigo-400">Account</Text>
         </View>
         <View className="">
           <View className="flex-row w-[100%] justify-between">
@@ -71,6 +72,7 @@ const UserAddress = () => {
                 name="zipCode"
                 placeholder="Enter Zip/Postal Code"
                 errors={errors}
+                keyboardType="number-pad"
               />
             </View>
           </View>

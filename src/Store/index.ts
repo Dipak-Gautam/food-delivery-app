@@ -17,7 +17,6 @@ const cartSlice = createSlice({
       return updatedCart;
     },
     clearCart: (state) => {
-      console.log("cleare cart called");
       state = [];
       return state;
     },

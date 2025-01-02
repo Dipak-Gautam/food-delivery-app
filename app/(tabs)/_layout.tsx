@@ -3,7 +3,6 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React from "react";
 import { Text, View } from "react-native";
 import { Provider, useSelector } from "react-redux";
-import foodStore from "../../src/Store";
 import { IStore } from "../../src/schema/Store/mainStore.schema";
 
 const TabsLayout = () => {

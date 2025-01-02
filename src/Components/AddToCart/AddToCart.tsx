@@ -3,9 +3,10 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
 import { cartAction } from "../../Store";
 import productDataProp from "../../schema/ProductData/productData.schema";
+import { AddProductSchema } from "../../../app/Admin/AddProduct";
 
 interface AddToCartProp {
-  product: productDataProp;
+  product: productDataProp | AddProductSchema;
 }
 
 const AddToCart = ({ product }: AddToCartProp) => {

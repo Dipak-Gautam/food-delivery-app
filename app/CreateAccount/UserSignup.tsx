@@ -10,6 +10,9 @@ import { useSearchParams } from "expo-router/build/hooks";
 import SecureFetch from "../../src/ApiServices/SecureFetch";
 import { userEndPoint } from "../../src/ApiServices/endpoints";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import getallProduct from "../../src/ApiServices/functions/getAllproduct.api";
+import { useDispatch } from "react-redux";
+import { userAction } from "../../src/Store";
 
 const UserSignupSchema = z
   .object({
@@ -33,6 +36,7 @@ const asyncStorage = async (token: string) => {
 };
 
 const UserSignup = () => {
+  const dispatch = useDispatch();
   const searchParams = useSearchParams();
   const userInfo = searchParams.get("combinedData");
   let userData;
@@ -58,7 +62,7 @@ const UserSignup = () => {
       address: userData.userAddress.address,
       city: userData.userAddress.city,
       state: userData.userAddress.state,
-      zipcode: userData.userAddress.zipCode,
+      zipCode: userData.userAddress.zipCode,
       deliveryInstructions: userData.userAddress.deliveryInstruction,
       password: data.password,
     };
@@ -72,7 +76,8 @@ const UserSignup = () => {
     const response = await request.json();
     if (request.status == 200) {
       asyncStorage(response.token);
-      router.replace("(tabs)/Home");
+      getallProduct(response.token, dispatch);
+      dispatch(userAction.addData(response.response));
     } else {
       setError("root", {
         message: "Internal server error. Please try again later",
@@ -84,8 +89,9 @@ const UserSignup = () => {
       <View className="flex-1 justify-center  gap-10">
         <View>
           <Text className="text-5xl mb-2 text-indigo-400 font-medium">
-            Sign up
+            Create
           </Text>
+          <Text className="text-5xl font-medium text-indigo-400">Account</Text>
         </View>
         <View className="">
           <TextInputControllers

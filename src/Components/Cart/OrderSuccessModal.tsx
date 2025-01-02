@@ -11,7 +11,6 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Octicons from "@expo/vector-icons/Octicons";
-import { green } from "react-native-reanimated/lib/typescript/Colors";
 import { useSelector } from "react-redux";
 import { IStore } from "../../schema/Store/mainStore.schema";
 

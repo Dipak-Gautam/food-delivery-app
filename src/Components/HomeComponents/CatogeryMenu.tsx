@@ -17,7 +17,6 @@ interface CatogeryMenuProp {
 }
 
 const CatogeryMenu = ({ search, value }: CatogeryMenuProp) => {
-  console.log("value", value);
   const [active, setActive] = useState(value ? value : 0);
 
   useEffect(() => {

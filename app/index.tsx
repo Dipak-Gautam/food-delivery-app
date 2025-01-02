@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 import React, { useEffect } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch } from "react-redux";
@@ -19,7 +19,6 @@ const index = () => {
     }
 
     if (Token !== null) {
-      router.navigate("/(tabs)/Home");
       getallProduct(Token, dispatch);
       getUser(Token, dispatch);
       dispatch(loginTokenAction.addToken(Token));
@@ -39,6 +38,10 @@ const index = () => {
   return (
     <View className="flex-1 bg-white justify-center items-center px-4">
       <StatusBar style="auto" />
+      <View>
+        <ActivityIndicator color={"orange"} size={30} />
+        <Text className="mt-3">Loading ...</Text>
+      </View>
     </View>
   );
 };

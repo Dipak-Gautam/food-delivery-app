@@ -86,7 +86,7 @@ const CartModal = ({
     });
     const response = await request.json();
     if (request.status == 200) {
-      dispatch(messageAction.addMessage(generateOTP()));
+      dispatch(messageAction.addMessage(otp.current));
       dispatch(cartAction.clearCart());
     }
     isSubmmiting(false);

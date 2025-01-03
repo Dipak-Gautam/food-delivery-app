@@ -74,6 +74,12 @@ const RootLayout = () => {
               title: "Add Product",
             }}
           />
+          <Stack.Screen
+            name="Admin/UpdateProduct"
+            options={{
+              title: "Update Product",
+            }}
+          />
         </Stack>
       </SafeAreaProvider>
     </Provider>

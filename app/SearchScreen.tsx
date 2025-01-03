@@ -1,6 +1,7 @@
 import { useRouter } from "expo-router";
 import React, { Children, useEffect, useRef, useState } from "react";
 import {
+  Pressable,
   ScrollView,
   Text,
   TextInput,
@@ -143,7 +144,7 @@ const SearchScreen = () => {
         </View>
         <View className="">
           {showData?.map((item: productDataProp, index: number) => (
-            <TouchableOpacity
+            <Pressable
               key={item._id}
               onPress={() => {
                 (productDataRef.current = item), setModal(true);
@@ -155,7 +156,7 @@ const SearchScreen = () => {
               >
                 <SmallProductCard productData={item} />
               </View>
-            </TouchableOpacity>
+            </Pressable>
           ))}
         </View>
       </ScrollView>

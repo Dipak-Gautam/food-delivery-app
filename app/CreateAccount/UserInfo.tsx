@@ -45,13 +45,13 @@ const UserInfo = () => {
           <TextInputControllers
             control={control}
             name="name"
-            placeholder="Enter your Full Name"
+            placeholder="Full Name"
             errors={errors}
           />
           <TextInputControllers
             control={control}
             name="phoneNumber"
-            placeholder="Enter your Phone Number"
+            placeholder="Phone Number"
             errors={errors}
             keyboardType="number-pad"
           />

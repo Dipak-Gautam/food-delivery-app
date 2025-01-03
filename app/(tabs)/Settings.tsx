@@ -31,8 +31,8 @@ const Settings = () => {
         <FontAwesome name="user-circle-o" color={"gray"} size={85} />
       </View>
       <View className="my-3">
-        <Text>{userData.name}</Text>
-        <Text>{userData.mobile}</Text>
+        <Text className="text-center">{userData.name}</Text>
+        <Text className="text-center">{userData.mobile}</Text>
       </View>
       <View className="w-full px-2">
         <View>
@@ -93,26 +93,38 @@ const Settings = () => {
             </View>
           </TouchableOpacity>
         </View>
-        <View>
-          <Text className="text-lg text-gray-700 mt-4">Product Options</Text>
-        </View>
-        <View className="mt-3">
-          <TouchableOpacity
-            className="flex-row my-2 gap-4 items-center justify-between "
-            onPress={() => router.navigate("Admin/AddProduct")}
-          >
-            <View className="w-8">
-              <FontAwesome6 name="user-gear" size={23} />
-            </View>
-            <View className="flex-1">
-              <Text className="text-base font-medium">Add Product</Text>
-              <Text className="text-xs">add product to your collection</Text>
-            </View>
+        {userData.role == "admin" && (
+          <>
             <View>
-              <MaterialIcons name="navigate-next" size={30} color={"black"} />
+              <Text className="text-lg text-gray-700 mt-4">
+                Product Options
+              </Text>
             </View>
-          </TouchableOpacity>
-        </View>
+            <View className="mt-3">
+              <TouchableOpacity
+                className="flex-row my-2 gap-4 items-center justify-between "
+                onPress={() => router.navigate("Admin/AddProduct")}
+              >
+                <View className="w-8">
+                  <FontAwesome6 name="user-gear" size={23} />
+                </View>
+                <View className="flex-1">
+                  <Text className="text-base font-medium">Add Product</Text>
+                  <Text className="text-xs">
+                    add product to your collection
+                  </Text>
+                </View>
+                <View>
+                  <MaterialIcons
+                    name="navigate-next"
+                    size={30}
+                    color={"black"}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
       </View>
     </View>
   );

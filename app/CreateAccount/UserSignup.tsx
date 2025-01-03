@@ -63,9 +63,10 @@ const UserSignup = () => {
       city: userData.userAddress.city,
       state: userData.userAddress.state,
       zipCode: userData.userAddress.zipCode,
-      deliveryInstructions: userData.userAddress.deliveryInstruction,
+      deliveryInstructions: userData.userAddress.deliveryInstructions,
       password: data.password,
     };
+    console.log("form data", formData);
 
     const request = await SecureFetch({
       url: `${userEndPoint}/signup`,
@@ -97,13 +98,13 @@ const UserSignup = () => {
           <TextInputControllers
             control={control}
             name="email"
-            placeholder="Enter email"
+            placeholder="Email"
             errors={errors}
           />
           <TextInputControllers
             control={control}
             name="password"
-            placeholder="Enter Password"
+            placeholder="Password"
             errors={errors}
           />
           <TextInputControllers

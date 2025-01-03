@@ -77,13 +77,13 @@ const Login = () => {
               control={control}
               errors={errors}
               name="email"
-              placeholder="Enter your email"
+              placeholder="Email"
             />
             <TextInputControllers
               control={control}
               errors={errors}
               name="password"
-              placeholder="Enter your password"
+              placeholder="Password"
             />
           </View>
 

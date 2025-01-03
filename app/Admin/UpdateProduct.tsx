@@ -1,17 +1,21 @@
 import React, { useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useDispatch, useSelector } from "react-redux";
 import SecureFetch from "../../src/ApiServices/SecureFetch";
 import { mainEndpoint } from "../../src/ApiServices/endpoints";
-import TextInputControllers from "../../src/Components/Controllers/TextInputControllers";
-import SmallProductCard from "../../src/Components/ProductCard/SmallProductCard";
 import { IStore } from "../../src/schema/Store/mainStore.schema";
+import { useSelector } from "react-redux";
 import ResponseComponent from "../../src/Modal/ResponseComponent";
+import SmallProductCard from "../../src/Components/ProductCard/SmallProductCard";
+import TextInputControllers from "../../src/Components/Controllers/TextInputControllers";
+import { useSearchParams } from "expo-router/build/hooks";
+import { router } from "expo-router";
+import productDataProp from "../../src/schema/ProductData/productData.schema";
+import { MaterialIcons } from "@expo/vector-icons";
 
-const AddProductSchema = z.object({
+const updateProductSchema = z.object({
   image: z.string(),
   name: z.string(),
   rating: z.string(),
@@ -21,9 +25,17 @@ const AddProductSchema = z.object({
   description: z.string(),
   ingredients: z.string(),
 });
-export type AddProductSchema = z.infer<typeof AddProductSchema>;
+export type updateProductSchema = z.infer<typeof updateProductSchema>;
 
-const AddProduct = () => {
+const UpdateProduct = () => {
+  const searchParams = useSearchParams();
+  let productTemp = searchParams.get("productData");
+
+  if (productTemp == null) {
+    router.back();
+    return;
+  }
+  const productData: productDataProp = JSON.parse(productTemp);
   const [visible, setModal] = useState(false);
   const token = useSelector((store: IStore) => store.loginToken);
   const {
@@ -32,12 +44,23 @@ const AddProduct = () => {
     setError,
     formState: { errors, isSubmitting },
     watch,
-  } = useForm<AddProductSchema>({
-    resolver: zodResolver(AddProductSchema),
+  } = useForm<updateProductSchema>({
+    resolver: zodResolver(updateProductSchema),
+    defaultValues: {
+      image: productData.image,
+      name: productData.name,
+      rating: productData.rating,
+      category: productData.category,
+      popularity: productData.popularity.toString(),
+      price: productData.price.toString(),
+      description: productData.description,
+      ingredients: productData.ingredients.map((item) => item.trim()).join(","),
+    },
   });
   const liveValues = watch();
-  const onSubbmit: SubmitHandler<AddProductSchema> = async (data) => {
+  const onSubbmit: SubmitHandler<updateProductSchema> = async (data) => {
     const formdata = {
+      id: productData._id,
       image: data.image,
       name: data.name,
       rating: data.rating,
@@ -47,18 +70,43 @@ const AddProduct = () => {
       description: data.description,
       ingredients: data.ingredients.split(","),
     };
-    console.log("form data", formdata);
+
     const request = await SecureFetch({
-      url: `${mainEndpoint}/product/add`,
+      url: `${mainEndpoint}/product`,
       header: {
         "content-type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      method: "POST",
+      method: "PATCH",
       body: JSON.stringify(formdata),
     });
     const response = await request.json();
-    console.log("request", request);
+
+    if (request.status == 200) {
+      setModal(true);
+    } else {
+      setError("root", {
+        message: "Internal server error. Please try again later",
+      });
+    }
+  };
+
+  const handleDelete = async () => {
+    const formdata = {
+      id: productData._id,
+    };
+
+    const request = await SecureFetch({
+      url: `${mainEndpoint}/product`,
+      header: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "DELETE",
+      body: JSON.stringify(formdata),
+    });
+    const response = await request.json();
+
     if (request.status == 200) {
       setModal(true);
     } else {
@@ -70,6 +118,29 @@ const AddProduct = () => {
   return (
     <>
       <ScrollView className="flex-1 bg-white px-5 pt-2">
+        <View className=" mb-6">
+          <View className=" items-center justify-center my-3 relative">
+            <Text className="text-center font-semibold text-xl">Preview</Text>
+            <TouchableOpacity
+              className="absolute right-0"
+              onPress={() => {
+                Alert.alert(
+                  "Delete Product",
+                  "Are you sure you want to delete the product?",
+                  [
+                    { text: "Cancel", style: "cancel" },
+                    { text: "Yes", onPress: () => handleDelete() },
+                  ]
+                );
+              }}
+            >
+              <MaterialIcons name="delete-outline" color={"red"} size={30} />
+            </TouchableOpacity>
+          </View>
+          <View>
+            <SmallProductCard productData={liveValues} />
+          </View>
+        </View>
         <View className="gap-2">
           <TextInputControllers
             control={control}
@@ -126,14 +197,7 @@ const AddProduct = () => {
             Note: provide ingredients seperated by comma ","
           </Text>
         </View>
-        <View className="mt-9 my-6">
-          <View className=" items-center justify-center">
-            <Text className="text-center font-semibold text-xl">Preview</Text>
-          </View>
-          <View>
-            <SmallProductCard productData={liveValues} />
-          </View>
-        </View>
+
         <TouchableOpacity
           onPress={handleSubmit(onSubbmit)}
           disabled={isSubmitting}
@@ -146,14 +210,14 @@ const AddProduct = () => {
             {isSubmitting ? (
               <Text>Submitting...</Text>
             ) : (
-              <Text>Add Product</Text>
+              <Text>Update Product</Text>
             )}
           </Text>
         </TouchableOpacity>
       </ScrollView>
       {visible && (
         <ResponseComponent
-          message="Product added successfully"
+          message="Product updated successfully"
           setModal={setModal}
         />
       )}
@@ -161,4 +225,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;

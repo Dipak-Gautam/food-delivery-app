@@ -16,6 +16,7 @@ const SecureFetch = async ({
     headers: header,
     body: body ? body : undefined,
   });
+
   //all the reeors from the back end will be handred from here
   //eg : statuc code 500.., 400.. and many more
 

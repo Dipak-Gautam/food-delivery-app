@@ -1,5 +1,11 @@
 import React, { useRef, useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  Pressable,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import BigProductCard from "../ProductCard/BigProductCard";
 import heroDataProp from "../../schema/HeroCard/heroData.schema";
 import productDataProp from "../../schema/ProductData/productData.schema";
@@ -53,7 +59,7 @@ const HeroCard = ({
       </View>
       <ScrollView className=" flex-row gap-6" horizontal>
         {productData.map((item: productDataProp, index: number) => (
-          <TouchableOpacity
+          <Pressable
             onPress={() => {
               productDataRef.current = item;
               setModal(true);
@@ -61,7 +67,7 @@ const HeroCard = ({
             key={index}
           >
             <BigProductCard productData={item} />
-          </TouchableOpacity>
+          </Pressable>
         ))}
       </ScrollView>
       <DescriptionModal

@@ -61,7 +61,7 @@ const UserAddress = () => {
               <TextInputControllers
                 control={control}
                 name="state"
-                placeholder="Enter State"
+                placeholder="State"
                 errors={errors}
               />
             </View>
@@ -70,7 +70,7 @@ const UserAddress = () => {
               <TextInputControllers
                 control={control}
                 name="zipCode"
-                placeholder="Enter Zip/Postal Code"
+                placeholder="Zip/Postal Code"
                 errors={errors}
                 keyboardType="number-pad"
               />
@@ -79,13 +79,13 @@ const UserAddress = () => {
           <TextInputControllers
             control={control}
             name="city"
-            placeholder="Enter your City"
+            placeholder="City"
             errors={errors}
           />
           <TextInputControllers
             control={control}
             name="address"
-            placeholder="Enter your address"
+            placeholder="Address"
             errors={errors}
           />
           <Controller

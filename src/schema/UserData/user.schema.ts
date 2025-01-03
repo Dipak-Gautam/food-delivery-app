@@ -8,4 +8,5 @@ export interface IUserProp {
   state: string;
   deliveryInstructions?: string;
   zipCode: string;
+  role: string;
 }

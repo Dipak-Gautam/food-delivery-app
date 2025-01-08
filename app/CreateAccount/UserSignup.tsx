@@ -67,7 +67,6 @@ const UserSignup = () => {
       password: data.password,
     };
     console.log("form data", formData);
-
     const request = await SecureFetch({
       url: `${userEndPoint}/signup`,
       header: { "content-type": "application/json" },
@@ -75,6 +74,7 @@ const UserSignup = () => {
       body: JSON.stringify(formData),
     });
     const response = await request.json();
+    console.log("response", response);
     if (request.status == 200) {
       asyncStorage(response.token);
       getallProduct(response.token, dispatch);

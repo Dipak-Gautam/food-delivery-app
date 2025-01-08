@@ -17,8 +17,8 @@ const SecureFetch = async ({
     body: body ? body : undefined,
   });
 
-  //all the reeors from the back end will be handred from here
-  //eg : statuc code 500.., 400.. and many more
+  //all the errors from the back end will be handed from here
+  //eg : status code 500.., 400.. and many more
 
   return request;
 };

@@ -15,6 +15,7 @@ import HeroCard from "../../src/Components/HomeComponents/HeroCard";
 import filterByCategory from "../../src/InitialRenderFunctions/catogeryFunction";
 import { useSelector } from "react-redux";
 import { IStore } from "../../src/schema/Store/mainStore.schema";
+import { StatusBar } from "expo-status-bar";
 
 const Home = () => {
   const router = useRouter();
@@ -36,6 +37,7 @@ const Home = () => {
 
   return (
     <SafeAreaView className="bg-white flex-1  ">
+      <StatusBar style="auto" />
       <ScrollView
         className="flex-1 px-4 bg-white"
         showsVerticalScrollIndicator={false}

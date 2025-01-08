@@ -3,7 +3,6 @@ import {
   FlatList,
   Modal,
   Pressable,
-  ScrollView,
   Text,
   TouchableOpacity,
   View,
@@ -118,7 +117,7 @@ const CartModal = ({
                   OverView
                 </Text>
                 <Text className=" text-xs text-gray-500 text-center">
-                  please confirm your order before procceding
+                  please confirm your order before proceeding
                 </Text>
               </View>
               <View className="mt-2 max-h-[50%] ">
@@ -137,7 +136,7 @@ const CartModal = ({
                 />
               </View>
               <View className="flex-row mt-3 mx-1">
-                <Text className="text-black w-32 ">Delevery Charge</Text>
+                <Text className="text-black w-32 ">Delivery Charge</Text>
                 <Text className="mr-2">:</Text>
                 <Text>$ 12</Text>
               </View>

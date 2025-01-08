@@ -2,7 +2,7 @@ import { Tabs } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React from "react";
 import { Text, View } from "react-native";
-import { Provider, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { IStore } from "../../src/schema/Store/mainStore.schema";
 
 const TabsLayout = () => {

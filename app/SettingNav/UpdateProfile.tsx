@@ -15,9 +15,6 @@ import SecureFetch from "../../src/ApiServices/SecureFetch";
 import { userEndPoint } from "../../src/ApiServices/endpoints";
 import { userAction } from "../../src/Store";
 import TextInputControllers from "../../src/Components/Controllers/TextInputControllers";
-import { SafeAreaView } from "react-native-safe-area-context";
-import OrderSuccessModal from "../../src/Components/Cart/OrderSuccessModal";
-import { AntDesign } from "@expo/vector-icons";
 import ResponseComponent from "../../src/Modal/ResponseComponent";
 
 const updateProfileSchema = z.object({

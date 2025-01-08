@@ -1,8 +1,6 @@
 import React from "react";
-
-import { Control, Controller, FieldErrors, FieldValues } from "react-hook-form";
-
-import { Text, TextInput, TextInputProps, View } from "react-native";
+import { Control, Controller, FieldValues } from "react-hook-form";
+import { Text, TextInputProps, View } from "react-native";
 import { FloatingLabelInput } from "react-native-floating-label-input";
 
 interface TextInputControllersProp extends TextInputProps {

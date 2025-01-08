@@ -2,7 +2,7 @@ import React from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import TextInputControllers from "../../src/Components/Controllers/TextInputControllers";
-import { string, z } from "zod";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { router } from "expo-router";
@@ -28,7 +28,6 @@ const UserAddress = () => {
   const {
     control,
     handleSubmit,
-    setError,
     formState: { errors, isSubmitting },
   } = useForm<UserAddressSchema>({
     resolver: zodResolver(UserAddressSchema),

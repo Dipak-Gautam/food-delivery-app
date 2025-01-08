@@ -4,7 +4,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Text, TouchableOpacity, View } from "react-native";
 import { z } from "zod";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useSearchParams } from "expo-router/build/hooks";
 import SecureFetch from "../../src/ApiServices/SecureFetch";
 import { userEndPoint } from "../../src/ApiServices/endpoints";
 import TextInputControllers from "../../src/Components/Controllers/TextInputControllers";

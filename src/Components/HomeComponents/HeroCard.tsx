@@ -7,7 +7,6 @@ import {
   View,
 } from "react-native";
 import BigProductCard from "../ProductCard/BigProductCard";
-import heroDataProp from "../../schema/HeroCard/heroData.schema";
 import productDataProp from "../../schema/ProductData/productData.schema";
 import { useRouter } from "expo-router";
 import DescriptionModal from "../Description/DescriptionModal";

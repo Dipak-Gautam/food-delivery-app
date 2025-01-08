@@ -1,12 +1,5 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import {
-  FlatList,
-  Modal,
-  Pressable,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React, { SetStateAction } from "react";
+import { Modal, Pressable, Text, TouchableOpacity, View } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -46,7 +39,7 @@ const OrderSuccessModal = ({ visible, setModal }: CartModalProp) => {
               </View>
               <View className="my-2">
                 <Text className="text-sm">
-                  Your order has been successfully placed. Your delevery otp is
+                  Your order has been successfully placed. Your delivery otp is
                   :
                 </Text>
                 <Text className="text-center text-lg font-semibold">

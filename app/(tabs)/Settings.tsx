@@ -23,7 +23,6 @@ const Settings = () => {
     ]);
   };
   const userData = useSelector((store: IStore) => store.user);
-  const token = useSelector((store: IStore) => store.loginToken);
 
   return (
     <View className="bg-white flex-1 px-4 items-center">

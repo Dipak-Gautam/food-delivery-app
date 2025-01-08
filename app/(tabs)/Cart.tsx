@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
-
 import { IStore } from "../../src/schema/Store/mainStore.schema";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Banner from "../../src/Components/Cart/Banner";

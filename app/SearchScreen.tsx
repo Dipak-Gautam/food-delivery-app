@@ -21,7 +21,6 @@ import productDataProp from "../src/schema/ProductData/productData.schema";
 import { useSelector } from "react-redux";
 import { IStore } from "../src/schema/Store/mainStore.schema";
 import filterByCategory from "../src/InitialRenderFunctions/catogeryFunction";
-import * as Animatable from "react-native-animatable";
 import searchFunction from "../src/InitialRenderFunctions/searchFunction";
 
 const categoryValue: Record<string, number> = {
@@ -78,7 +77,6 @@ const SearchScreen = () => {
     if (search == "") {
       return;
     }
-
     const delayDebounceFn = setTimeout(() => {
       setShowData(searchFunction(allProduct, search));
     }, 500);

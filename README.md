@@ -24,14 +24,14 @@ Ensure you have the following tools installed:
    ```
 
 3. **Update the API Endpoint**:
-   Navigate to `src/apiService/endpoint.js` (or `.ts` if using TypeScript) and update the endpoint URL to point to your API:
+   Navigate to `src/ApiService/endpoint.ts` and update the endpoint URL to point to your API:
    ```javascript
-   export const API_ENDPOINT = "https://your-api-url.com";
+   export const mainEndpoint = "https://your-api-url.com";
    ```
 
 4. **Start the Development Server**:
    ```bash
-   expo start
+     npx expo start
    ```
 
 5. **Run the App**:
@@ -39,12 +39,12 @@ Ensure you have the following tools installed:
 
 ## Project Structure
 
-- `src/` - Contains the main source code for the app.
+- `src/` - Contains the components and other functions for the app.
   - `components/` - Reusable components.
-  - `screens/` - Application screens.
-  - `apiService/` - API configuration and services.
-  - `assets/` - Images, fonts, and other static assets.
-
+  - `ApiService/` - API configuration and services.
+  - `schema/` - Contains schema for verious data
+  - `Store/` - Contains the redux toolkit implementation
+- `app` - Contains all the screens 
 ## Environment Configuration
 
 Ensure your API endpoint is correctly configured before running the app. This is located in the file:

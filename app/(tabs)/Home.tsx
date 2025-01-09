@@ -37,7 +37,7 @@ const Home = () => {
 
   return (
     <SafeAreaView className="bg-white flex-1  ">
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
       <ScrollView
         className="flex-1 px-4 bg-white"
         showsVerticalScrollIndicator={false}

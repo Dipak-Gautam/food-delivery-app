@@ -37,7 +37,7 @@ const index = () => {
 
   return (
     <View className="flex-1 bg-white justify-center items-center px-4">
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
       <View>
         <ActivityIndicator color={"orange"} size={30} />
         <Text className="mt-3">Loading ...</Text>

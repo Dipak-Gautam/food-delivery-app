@@ -56,7 +56,7 @@ const Login = () => {
       dispatch(userAction.addData(response.data));
     } else {
       setError("root", {
-        message: "Internal server error. Please try again later",
+        message: response.message,
       });
     }
   };

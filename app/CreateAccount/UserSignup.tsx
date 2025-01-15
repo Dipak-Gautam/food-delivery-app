@@ -12,7 +12,7 @@ import { userEndPoint } from "../../src/ApiServices/endpoints";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import getallProduct from "../../src/ApiServices/functions/getAllproduct.api";
 import { useDispatch } from "react-redux";
-import { userAction } from "../../src/Store";
+import { loginTokenAction, userAction } from "../../src/Store";
 
 const UserSignupSchema = z
   .object({
@@ -78,6 +78,7 @@ const UserSignup = () => {
       asyncStorage(response.token);
       getallProduct(response.token, dispatch);
       dispatch(userAction.addData(response.response));
+      dispatch(loginTokenAction.addToken(response.token));
     } else {
       if (response.code == "11000") {
         setError("email", { message: "email already taken" });

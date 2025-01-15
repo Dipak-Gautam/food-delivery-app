@@ -101,11 +101,12 @@ const DescriptionModal = ({
               {productData.description}
             </Text>
           </View>
-          <View className="px-4 mt-2 ">
+          <View className="px-4 mt-2 flex-1">
             <Text className="text-black text-lg  font-semibold ">
               Ingredients
             </Text>
             <FlatList
+              showsVerticalScrollIndicator={false}
               data={productData.ingredients}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (

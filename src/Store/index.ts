@@ -29,7 +29,6 @@ const loginTokenSlice = createSlice({
   reducers: {
     addToken: (state, action) => {
       state = action.payload;
-      console.log("token", action.payload);
       return state;
     },
   },

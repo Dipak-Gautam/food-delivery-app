@@ -100,7 +100,7 @@ const AddProduct = () => {
             control={control}
             errors={errors}
             name="popularity"
-            placeholder="Populatiy"
+            placeholder="Popularity"
             keyboardType="numeric"
           />
           <TextInputControllers
@@ -123,7 +123,7 @@ const AddProduct = () => {
             placeholder="Ingredients"
           />
           <Text className="text-red-500 italic text-sm">
-            Note: provide ingredients seperated by comma ","
+            Note: provide ingredients separated by comma ","
           </Text>
         </View>
         <View className="mt-9 my-6">

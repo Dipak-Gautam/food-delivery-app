@@ -47,7 +47,7 @@ const AddProduct = () => {
       description: data.description,
       ingredients: data.ingredients.split(","),
     };
-    console.log("form data", formdata);
+
     const request = await SecureFetch({
       url: `${mainEndpoint}/product/add`,
       header: {
@@ -76,6 +76,7 @@ const AddProduct = () => {
             errors={errors}
             name="image"
             placeholder="Image link"
+            multiline={true}
           />
 
           <TextInputControllers
@@ -100,7 +101,7 @@ const AddProduct = () => {
             control={control}
             errors={errors}
             name="popularity"
-            placeholder="Populatiy"
+            placeholder="Popularity"
             keyboardType="numeric"
           />
           <TextInputControllers
@@ -115,15 +116,17 @@ const AddProduct = () => {
             errors={errors}
             name="description"
             placeholder="Description"
+            multiline={true}
           />
           <TextInputControllers
             control={control}
             errors={errors}
             name="ingredients"
             placeholder="Ingredients"
+            multiline={true}
           />
           <Text className="text-red-500 italic text-sm">
-            Note: provide ingredients seperated by comma ","
+            Note: provide ingredients separated by comma ","
           </Text>
         </View>
         <View className="mt-9 my-6">

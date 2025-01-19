@@ -99,7 +99,7 @@ const Settings = () => {
                 Product Options
               </Text>
             </View>
-            <View className="mt-3">
+            <View className="mt-3 gap-2">
               <TouchableOpacity
                 className="flex-row my-2 gap-4 items-center justify-between "
                 onPress={() => router.navigate("Admin/AddProduct")}
@@ -111,6 +111,27 @@ const Settings = () => {
                   <Text className="text-base font-medium">Add Product</Text>
                   <Text className="text-xs">
                     add product to your collection
+                  </Text>
+                </View>
+                <View>
+                  <MaterialIcons
+                    name="navigate-next"
+                    size={30}
+                    color={"black"}
+                  />
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                className="flex-row my-2 gap-4 items-center justify-between "
+                onPress={() => router.navigate("Admin/SalesDetail")}
+              >
+                <View className="w-8">
+                  <FontAwesome6 name="money-bill-trend-up" size={23} />
+                </View>
+                <View className="flex-1">
+                  <Text className="text-base font-medium">Sales</Text>
+                  <Text className="text-xs">
+                    View all your sales and delivery
                   </Text>
                 </View>
                 <View>

@@ -14,7 +14,7 @@ import { userEndPoint } from "../src/ApiServices/endpoints";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import getallProduct from "../src/ApiServices/functions/getAllproduct.api";
 import { useDispatch } from "react-redux";
-import { userAction } from "../src/Store";
+import { loginTokenAction, userAction } from "../src/Store";
 
 const asyncStorage = async (token: string) => {
   await AsyncStorage.setItem("Token", token);
@@ -54,9 +54,10 @@ const Login = () => {
       asyncStorage(response.token);
       getallProduct(response.token, dispatch);
       dispatch(userAction.addData(response.data));
+      dispatch(loginTokenAction.addToken(response.token));
     } else {
       setError("root", {
-        message: "Internal server error. Please try again later",
+        message: response.message,
       });
     }
   };

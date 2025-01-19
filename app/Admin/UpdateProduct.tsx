@@ -54,7 +54,9 @@ const UpdateProduct = () => {
       popularity: productData.popularity.toString(),
       price: productData.price.toString(),
       description: productData.description,
-      ingredients: productData.ingredients.map((item) => item.trim()).join(","),
+      ingredients: productData?.ingredients
+        ?.map((item) => item.trim())
+        .join(","),
     },
   });
   const liveValues = watch();

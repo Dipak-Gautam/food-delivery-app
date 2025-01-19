@@ -12,7 +12,7 @@ import { userEndPoint } from "../../src/ApiServices/endpoints";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import getallProduct from "../../src/ApiServices/functions/getAllproduct.api";
 import { useDispatch } from "react-redux";
-import { userAction } from "../../src/Store";
+import { loginTokenAction, userAction } from "../../src/Store";
 
 const UserSignupSchema = z
   .object({
@@ -74,15 +74,19 @@ const UserSignup = () => {
       body: JSON.stringify(formData),
     });
     const response = await request.json();
-    console.log("response", response);
     if (request.status == 200) {
       asyncStorage(response.token);
       getallProduct(response.token, dispatch);
       dispatch(userAction.addData(response.response));
+      dispatch(loginTokenAction.addToken(response.token));
     } else {
-      setError("root", {
-        message: "Internal server error. Please try again later",
-      });
+      if (response.code == "11000") {
+        setError("email", { message: "email already taken" });
+      } else {
+        setError("root", {
+          message: "Internal server error. Please try again later",
+        });
+      }
     }
   };
   return (

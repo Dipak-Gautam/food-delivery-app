@@ -75,6 +75,7 @@ const UpdateProfile = () => {
       body: JSON.stringify(formdata),
     });
     const response = await request.json();
+
     if (request.status == 200) {
       setModal(true);
       dispatch(userAction.addData(response.data));
@@ -88,7 +89,7 @@ const UpdateProfile = () => {
         <View className="gap-5 w-full">
           <View>
             <Text className="text-black text-xl font-semibold">
-              Update Persional Info
+              Update Personal Info
             </Text>
           </View>
 
@@ -153,7 +154,7 @@ const UpdateProfile = () => {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   className="border-b p-2 rounded-lg text-base text-black"
-                  placeholder="Provide a delevery instruction"
+                  placeholder="Provide a delivery instruction"
                   placeholderTextColor="gray"
                   onBlur={onBlur}
                   onChangeText={onChange}
